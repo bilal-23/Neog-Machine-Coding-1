@@ -21,6 +21,7 @@ const Category: React.FC<Props> = ({ heading, shelf }) => {
 
           return (
             <Book
+              key={book.id}
               id={book.id}
               name={book.name}
               author={book.author}

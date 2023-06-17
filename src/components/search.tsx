@@ -25,6 +25,7 @@ const Search = () => {
         {searchResult.map((book) => {
           return (
             <Book
+              key={book.id}
               id={book.id}
               name={book.name}
               image={book.image}

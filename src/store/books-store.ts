@@ -19,11 +19,14 @@ export const useBooksStore = create<booksStore>((set, get) => ({
     searchResult: [],
     setSearchResult: (searchResult: book[]) => set({ searchResult }),
     setSearchTerm: (searchTerm: string) => {
-        set({ searchTerm });
         const books = get().books
-        if (searchTerm === "") return set({ searchResult: [] });
+        set({ searchTerm });
+        if (searchTerm === "") {
+            return set({ searchResult: [] });
+        }
         const result = books.filter((book) => book.name.toLowerCase().includes(searchTerm.toLowerCase()));
-        set({ searchResult: result });
+
+        set({ searchResult: [...result] });
     },
     changeShelf: (bookId: string, shelf: book["shelf"]) => {
         const books = get().books;
@@ -35,7 +38,5 @@ export const useBooksStore = create<booksStore>((set, get) => ({
         const searchResultIndex = searchResult.findIndex((book) => book.id === bookId);
         searchResult[searchResultIndex] = { ...searchResult[searchResultIndex], shelf };
         set({ searchResult: [...searchResult] });
-
-
     }
 }));
